@@ -1,0 +1,106 @@
+@APITest_HostAddress = http://localhost:5260
+@apiKey = your-secret-key
+@adminToken = replace-with-admin-token
+@managerToken = replace-with-manager-token
+@employeeToken = replace-with-employee-token
+
+### Login as Admin
+POST {{APITest_HostAddress}}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+X-API-KEY: {{apiKey}}
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Login as Manager
+POST {{APITest_HostAddress}}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+X-API-KEY: {{apiKey}}
+
+{
+  "username": "manager",
+  "password": "manager123"
+}
+
+### Login as Employee
+POST {{APITest_HostAddress}}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+X-API-KEY: {{apiKey}}
+
+{
+  "username": "employee",
+  "password": "employee123"
+}
+
+### Get tasks as Employee
+GET {{APITest_HostAddress}}/api/tasks
+Accept: application/json
+X-API-KEY: {{apiKey}}
+Authorization: Bearer {{employeeToken}}
+
+### Create task as Manager
+POST {{APITest_HostAddress}}/api/tasks
+Accept: application/json
+Content-Type: application/json
+X-API-KEY: {{apiKey}}
+Authorization: Bearer {{managerToken}}
+
+{
+  "title": "Prepare weekly report",
+  "description": "Compile the team task progress update.",
+  "assignedTo": "employee"
+}
+
+### Update task as Manager
+PUT {{APITest_HostAddress}}/api/tasks/1
+Accept: application/json
+Content-Type: application/json
+X-API-KEY: {{apiKey}}
+Authorization: Bearer {{managerToken}}
+
+{
+  "title": "Prepare sprint board",
+  "description": "Set up tasks and priorities for the upcoming sprint.",
+  "assignedTo": "employee",
+  "isCompleted": true
+}
+
+### Get all users as Admin
+GET {{APITest_HostAddress}}/api/admin/users
+Accept: application/json
+X-API-KEY: {{apiKey}}
+Authorization: Bearer {{adminToken}}
+
+### Delete user as Admin
+DELETE {{APITest_HostAddress}}/api/admin/users/3
+Accept: application/json
+X-API-KEY: {{apiKey}}
+Authorization: Bearer {{adminToken}}
+
+### Negative check: Employee cannot create task
+POST {{APITest_HostAddress}}/api/tasks
+Accept: application/json
+Content-Type: application/json
+X-API-KEY: {{apiKey}}
+Authorization: Bearer {{employeeToken}}
+
+{
+  "title": "Unauthorized task",
+  "description": "This should fail for Employee role.",
+  "assignedTo": "employee"
+}
+
+### Negative check: Missing API key on login
+POST {{APITest_HostAddress}}/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
