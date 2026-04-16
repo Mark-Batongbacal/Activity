@@ -1,6 +1,6 @@
-@APITest_HostAddress = http://localhost:5260
+@APITest_HostAddress = https://localhost:7101
 @apiKey = your-secret-key
-@adminToken = replace-with-admin-token
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJyb2xlIjoiQWRtaW4iLCJleHAiOjE3NzYzNTU5ODF9._RdFaeMcMvtyYQPsazg_29a6xcFna1YWC6uJT-t4HJw
 @managerToken = replace-with-manager-token
 @employeeToken = replace-with-employee-token
 
